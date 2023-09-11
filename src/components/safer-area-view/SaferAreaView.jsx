@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView, StyleSheet, StatusBar, Platform,
-} from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 
 const Styles = StyleSheet.create({
