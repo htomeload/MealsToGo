@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import styled from 'styled-components/native';
+import { View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import RestaurantInfoCard from '../components/restaurant-info-card.components';
 
@@ -14,32 +15,33 @@ const mockRestaurantInfo = {
     isClosedTemporary: false,
 };
 
-const Styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    search: {
-        padding: 8,
-    },
-    searchBar: {
-        borderRadius: 3,
-    },
-    list: {
-        flex: 1,
-        padding: 12,
-        backgroundColor: 'green',
-    },
-});
+const RestaurantsScreenContainer = styled(View)`
+    flex: 1;
+`;
+
+const SearchBarContainer = styled(View)`
+    padding: 8px;
+`;
+
+const RestaurantListContainer = styled(View)`
+    flex: 1;
+    padding: 12px;
+    background-color: blue;
+`;
+
+const SearchbarStyled = styled(Searchbar)`
+    border-radius: 3px;
+`;
 
 export default function RestaurantsScreen() {
     return (
-        <View style={Styles.container}>
-            <View style={Styles.search}>
-                <Searchbar style={Styles.searchBar} />
-            </View>
-            <View style={Styles.list}>
+        <RestaurantsScreenContainer>
+            <SearchBarContainer>
+                <SearchbarStyled />
+            </SearchBarContainer>
+            <RestaurantListContainer>
                 <RestaurantInfoCard restaurant={mockRestaurantInfo} />
-            </View>
-        </View>
+            </RestaurantListContainer>
+        </RestaurantsScreenContainer>
     );
 }
