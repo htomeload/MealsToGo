@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import RestaurantInfo from '../components/restaurant-info.components';
+import RestaurantInfoCard from '../components/restaurant-info-card.components';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -38,7 +38,7 @@ export default function RestaurantsScreen() {
                 <Searchbar style={Styles.searchBar} />
             </View>
             <View style={Styles.list}>
-                <RestaurantInfo restaurant={mockRestaurantInfo} />
+                <RestaurantInfoCard restaurant={mockRestaurantInfo} />
             </View>
         </View>
     );
