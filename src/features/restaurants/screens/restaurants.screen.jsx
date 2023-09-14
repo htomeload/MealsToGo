@@ -20,13 +20,12 @@ const RestaurantsScreenContainer = styled(View)`
 `;
 
 const SearchBarContainer = styled(View)`
-    padding: 8px;
+    padding: ${(props) => props.theme?.space?.[2]};
 `;
 
 const RestaurantListContainer = styled(View)`
     flex: 1;
-    padding: 12px;
-    background-color: blue;
+    padding: ${(props) => props.theme?.space?.[3]};
 `;
 
 const SearchbarStyled = styled(Searchbar)`
