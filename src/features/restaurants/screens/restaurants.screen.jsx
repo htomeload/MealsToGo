@@ -6,13 +6,13 @@ import RestaurantInfoCard from '../components/restaurant-info-card.components';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
-    icon: '',
+    icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos: ['https://i.imgur.com/4q0Jo6G.jpg'],
     address: '999/99 Default Address',
     openingHours: '08:00',
     isOpenNow: true,
     rating: 4,
-    isClosedTemporary: false,
+    isClosedTemporary: true,
 };
 
 const RestaurantsScreenContainer = styled(View)`
