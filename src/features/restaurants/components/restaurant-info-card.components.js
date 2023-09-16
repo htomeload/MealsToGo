@@ -1,23 +1,20 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import { Card, Text } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import star from './../../../../assets/star';
 import open from './../../../../assets/open';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import Spacer from '../../../components/spacer/Spacer.components';
+import Text from '../../../components/typography/text.components';
+import styled from 'styled-components/native';
+
+import { CategoryIcon } from './restaurant-info-card.styles';
 
 const Title = styled(Text)`
     padding-bottom: ${(props) => props.theme?.space?.[1]};
-    color: ${(props) => props.theme.colors?.ui?.primary};
-    font-family: ${(props) => props.theme?.fonts?.heading};
-    font-size: ${(props) => props.theme?.fontSizes?.body};
 `;
 
 const Address = styled(Text)`
-    color: ${(props) => props.theme.colors?.ui?.primary};
-    font-family: ${(props) => props.theme?.fonts?.body};
-    font-size: ${(props) => props.theme?.fontSizes?.caption};
     padding-bottom: ${(props) => props.theme?.space?.[3]};
 `;
 
@@ -26,6 +23,7 @@ const RestaurantCard = styled(Card)`
     padding-horizontal: ${(props) => props.theme?.space?.[3]};
     overflow: hidden;
     border-radius: 4px;
+    padding-bottom: ${(props) => props.theme?.space?.[3]};
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
@@ -55,11 +53,6 @@ const ClosedTemporary = styled(Text)`
     color: ${(props) => props.theme.colors?.text?.error};
 `;
 
-const CategoryIcon = styled(Image)`
-    width: 15px;
-    height: 15px;
-`;
-
 export default function RestaurantInfoCard({ restaurant }) {
     const { name, icon, photos, address, openingHours, rating, isClosedTemporary, isOpenNow } =
         restaurant;
@@ -69,7 +62,7 @@ export default function RestaurantInfoCard({ restaurant }) {
     return (
         <RestaurantCard elevation={5}>
             <RestaurantCardCover key={name} source={{ uri: photos?.[0] }} />
-            <Title>{name}</Title>
+            <Title variant="body">{name}</Title>
             <RatingAndOpening>
                 <Rating>
                     {ratingArray?.map((item, index) => (
@@ -78,15 +71,17 @@ export default function RestaurantInfoCard({ restaurant }) {
                 </Rating>
                 <SectionEnd>
                     {isClosedTemporary && (
-                        <ClosedTemporary variant="labelMedium">CLOSE TEMPORARY</ClosedTemporary>
+                        <ClosedTemporary variant="error">CLOSE TEMPORARY</ClosedTemporary>
                     )}
-                    <Spacer variant={'left.large'} />
-                    {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-                    <Spacer variant={'left.large'} />
-                    <CategoryIcon source={{ uri: icon }} />
+                    <Spacer position="left" scale="large">
+                        {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+                    </Spacer>
+                    <Spacer position="left" scale="large">
+                        <CategoryIcon source={{ uri: icon }} />
+                    </Spacer>
                 </SectionEnd>
             </RatingAndOpening>
-            <Address>{address}</Address>
+            <Address variant="caption">{address}</Address>
         </RestaurantCard>
     );
 }
