@@ -15,30 +15,52 @@ import {
     SectionEnd,
     Title,
 } from './restaurant-info-card.styles';
+import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
+
+const PHOTO_PLACEHOLDER = 'https://i.imgur.com/4q0Jo6G.jpg';
 
 export default function RestaurantInfoCard({ restaurant }) {
     const { name, icon, photos, address, openingHours, rating, isClosedTemporary, isOpenNow } =
         restaurant;
 
-    const ratingArray = Array.from(new Array(Math.floor(rating)));
+    const ratingArray =
+        Array(Math.round(Math.abs(rating ?? 0)))
+            .fill()
+            .map((x, i) => Math.abs(i) ?? 0) ?? [];
 
     return (
         <RestaurantCard elevation={5}>
-            <RestaurantCardCover key={name} source={{ uri: photos?.[0] }} />
+            <RestaurantCardCover
+                resizeMethod="scale"
+                resizeMode="cover"
+                key={name}
+                source={{
+                    uri: photos?.[0] ? photos?.[0] : PHOTO_PLACEHOLDER,
+                }}
+            />
             <Title variant="body">{name}</Title>
             <RatingAndOpening>
-                <Rating>
-                    {ratingArray?.map((item, index) => (
-                        <SvgXml key={`${name}-rating-${index}`} xml={star} width={20} height={20} />
-                    ))}
-                </Rating>
+                <ViewVisibility isVisible={ratingArray?.length > 0}>
+                    <Rating>
+                        {ratingArray?.map((item, index) => (
+                            <SvgXml
+                                key={`${name}-rating-${index}`}
+                                xml={star}
+                                width={20}
+                                height={20}
+                            />
+                        ))}
+                    </Rating>
+                </ViewVisibility>
                 <SectionEnd>
-                    {isClosedTemporary && (
+                    <ViewVisibility isVisible={isClosedTemporary}>
                         <ClosedTemporary variant="error">CLOSE TEMPORARY</ClosedTemporary>
-                    )}
-                    <Spacer position="left" scale="large">
-                        {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-                    </Spacer>
+                    </ViewVisibility>
+                    <ViewVisibility isVisible={isOpenNow}>
+                        <Spacer position="left" scale="large">
+                            <SvgXml xml={open} width={20} height={20} />
+                        </Spacer>
+                    </ViewVisibility>
                     <Spacer position="left" scale="large">
                         <CategoryIcon source={{ uri: icon }} />
                     </Spacer>

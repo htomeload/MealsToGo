@@ -1,9 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { View, FlatList } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import React, { useContext } from 'react';
 import RestaurantInfoCard from '../components/restaurant-info-card.components';
 import Spacer from '../../../components/spacer/Spacer.components';
+import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
+import { LoadingIndicator } from '../../../components/loading-indicator/LoadingIndicator.components';
+import {
+    RestaurantListContainer,
+    RestaurantsScreenContainer,
+    SearchBarContainer,
+    SearchbarStyled,
+    ViewVisibilityStyled,
+} from './restaurants.styles';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -16,39 +22,34 @@ const mockRestaurantInfo = {
     isClosedTemporary: true,
 };
 
-const RestaurantsScreenContainer = styled(View)`
-    flex: 1;
-`;
-
-const SearchBarContainer = styled(View)`
-    padding: ${(props) => props.theme?.space?.[2]};
-`;
-
-const RestaurantListContainer = styled(FlatList).attrs({
-    contentContainerStyle: { padding: 16 },
-})`
-    flex: 1;
-`;
-
-const SearchbarStyled = styled(Searchbar)`
-    border-radius: 3px;
-`;
-
 export default function RestaurantsScreen() {
+    const { restaurants, isLoading, error } = useContext(RestaurantContext);
+
     return (
         <RestaurantsScreenContainer>
             <SearchBarContainer>
                 <SearchbarStyled />
             </SearchBarContainer>
-            <RestaurantListContainer
-                data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
-                renderItem={() => (
-                    <Spacer position={'bottom'} scale={'large'}>
-                        <RestaurantInfoCard restaurant={mockRestaurantInfo} />
-                    </Spacer>
-                )}
-                keyExtractor={(item) => item?.name}
-            />
+            <ViewVisibilityStyled isVisible={isLoading}>
+                <LoadingIndicator />
+            </ViewVisibilityStyled>
+            <ViewVisibilityStyled isVisible={!isLoading}>
+                <RestaurantListContainer
+                    data={restaurants}
+                    renderItem={(flatItem) => {
+                        const { item, index } = flatItem;
+
+                        return (
+                            <Spacer position={'bottom'} scale={'large'}>
+                                <RestaurantInfoCard
+                                    restaurant={{ ...item, address: item?.vicinity }}
+                                />
+                            </Spacer>
+                        );
+                    }}
+                    keyExtractor={(item) => item?.name}
+                />
+            </ViewVisibilityStyled>
         </RestaurantsScreenContainer>
     );
 }

@@ -13,6 +13,8 @@ import { useFonts as useLatoFonts, Lato_400Regular } from '@expo-google-fonts/la
 import { routeName, tabActiveIcons, tabInactiveIcons } from './src/constants/app.constants';
 import { colors } from './src/infrastructure/theme/colors';
 
+import { RestaurantContextProvider } from './src/services/restaurants/restaurants.context';
+
 const SaferAreaViewStyled = styled(SaferAreaView)`
     flex: 1;
 `;
@@ -73,9 +75,11 @@ export default function App() {
     return (
         <SaferAreaViewStyled>
             <ThemeProvider theme={theme}>
-                <NavigationContainer>
-                    <AppTabs />
-                </NavigationContainer>
+                <RestaurantContextProvider>
+                    <NavigationContainer>
+                        <AppTabs />
+                    </NavigationContainer>
+                </RestaurantContextProvider>
             </ThemeProvider>
         </SaferAreaViewStyled>
     );
