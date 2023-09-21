@@ -6,10 +6,9 @@ import { LoadingIndicator } from '../../../components/loading-indicator/LoadingI
 import {
     RestaurantListContainer,
     RestaurantsScreenContainer,
-    SearchBarContainer,
-    SearchbarStyled,
     ViewVisibilityStyled,
 } from './restaurants.styles';
+import Search from '../components/search.component';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -27,9 +26,7 @@ export default function RestaurantsScreen() {
 
     return (
         <RestaurantsScreenContainer>
-            <SearchBarContainer>
-                <SearchbarStyled />
-            </SearchBarContainer>
+            <Search />
             <ViewVisibilityStyled isVisible={isLoading}>
                 <LoadingIndicator />
             </ViewVisibilityStyled>

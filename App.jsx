@@ -14,6 +14,7 @@ import { routeName, tabActiveIcons, tabInactiveIcons } from './src/constants/app
 import { colors } from './src/infrastructure/theme/colors';
 
 import { RestaurantContextProvider } from './src/services/restaurants/restaurants.context';
+import { LocationContextProvider } from './src/services/location/location.context';
 
 const SaferAreaViewStyled = styled(SaferAreaView)`
     flex: 1;
@@ -75,11 +76,13 @@ export default function App() {
     return (
         <SaferAreaViewStyled>
             <ThemeProvider theme={theme}>
-                <RestaurantContextProvider>
-                    <NavigationContainer>
-                        <AppTabs />
-                    </NavigationContainer>
-                </RestaurantContextProvider>
+                <LocationContextProvider>
+                    <RestaurantContextProvider>
+                        <NavigationContainer>
+                            <AppTabs />
+                        </NavigationContainer>
+                    </RestaurantContextProvider>
+                </LocationContextProvider>
             </ThemeProvider>
         </SaferAreaViewStyled>
     );
