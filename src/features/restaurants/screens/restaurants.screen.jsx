@@ -9,6 +9,7 @@ import {
     ViewVisibilityStyled,
 } from './restaurants.styles';
 import Search from '../components/search.component';
+import { LocationContext } from '../../../services/location/location.context';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -22,7 +23,10 @@ const mockRestaurantInfo = {
 };
 
 export default function RestaurantsScreen() {
-    const { restaurants, isLoading, error } = useContext(RestaurantContext);
+    const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
+    const { isLocationLoading } = useContext(LocationContext);
+
+    const isLoading = isRestaurantLoading || isLocationLoading;
 
     return (
         <RestaurantsScreenContainer>
@@ -38,9 +42,7 @@ export default function RestaurantsScreen() {
 
                         return (
                             <Spacer position={'bottom'} scale={'large'}>
-                                <RestaurantInfoCard
-                                    restaurant={{ ...item, address: item?.vicinity }}
-                                />
+                                <RestaurantInfoCard restaurant={{ ...item }} />
                             </Spacer>
                         );
                     }}

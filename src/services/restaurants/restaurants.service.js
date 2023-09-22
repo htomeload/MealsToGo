@@ -1,7 +1,7 @@
 import camelize from 'camelize';
 import { mocks, mockImages } from './mock';
 
-export const restaurantRequest = (location = '51.219448,4.402464') => {
+export const restaurantRequest = (location) => {
     return new Promise((resolve, reject) => {
         try {
             const mock = mocks?.[location];
@@ -21,6 +21,7 @@ export const restaurantsTransform = ({ results = [] }) => {
 
         return {
             ...restaurant,
+            address: restaurant?.vicinity,
             isOpenNow: restaurant?.opening_hours && restaurant?.opening_hours?.open_now,
             isClosedTemporary: restaurant?.business_status === 'CLOSED_TEMPORARILY',
         };

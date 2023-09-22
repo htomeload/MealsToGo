@@ -8,36 +8,45 @@ export const LocationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [location, setLocation] = useState(null);
-    const [keyword, setKeyword] = useState('San Francisco');
+    const [keyword, setKeyword] = useState('');
 
-    const onSearch = async (searchKeyword) => {
-        try {
-            if (searchKeyword?.length) return;
+    let _timer = null;
 
-            setIsLoading(true);
-            setKeyword(searchKeyword);
+    const onSearch = (searchKeyword) => {
+        setIsLoading(true);
 
-            const result = await locationRequest(searchKeyword?.toLowerCase());
-            setLocation(locationTransform(result));
+        _timer = setTimeout(async () => {
+            try {
+                if (!searchKeyword?.length) return;
 
-            setIsLoading(false);
-        } catch (error) {
-            setIsLoading(false);
-            setError(error);
-        }
+                setKeyword(searchKeyword);
+                const result = await locationRequest(searchKeyword?.toLowerCase());
+
+                if (result) {
+                    setLocation(locationTransform(result));
+                }
+
+                setIsLoading(false);
+                clearTimeout(_timer);
+            } catch (error) {
+                setIsLoading(false);
+                setError(error);
+                clearTimeout(_timer);
+            }
+        }, 1000);
     };
 
     useEffect(() => {
-        onSearch(keyword);
+        return () => clearTimeout(_timer);
     }, []);
 
     return (
         <LocationContext.Provider
             value={{
-                isLoading,
+                isLocationLoading: isLoading,
                 error,
                 location,
-                search: onSearch,
+                searchLocation: onSearch,
                 keyword,
             }}
         >

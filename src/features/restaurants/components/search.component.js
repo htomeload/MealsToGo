@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SearchBarContainer, SearchbarStyled } from '../screens/restaurants.styles';
 import { LocationContext } from '../../../services/location/location.context';
 
 export default function Search() {
-    const { keyword, search } = useContext(LocationContext);
+    const { keyword, searchLocation } = useContext(LocationContext);
 
     const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -12,7 +12,7 @@ export default function Search() {
             <SearchbarStyled
                 placeholder="Search for the location"
                 value={searchKeyword}
-                onSubmitEditing={() => search?.(searchKeyword)}
+                onSubmitEditing={() => searchLocation?.(searchKeyword)}
                 onChangeText={(text) => setSearchKeyword(text)}
             />
         </SearchBarContainer>
