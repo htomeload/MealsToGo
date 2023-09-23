@@ -1,17 +1,29 @@
+export const tabRouteName = {
+    restaurantsTab: 'Restaurants',
+    mapTab: 'Map',
+    settingsTab: 'Settings',
+};
+
 export const routeName = {
-    restaurants: 'Restaurants',
-    map: 'Map',
-    settings: 'Settings',
+    restaurants: 'restaurantsScreen',
+    map: 'mapScreen',
+    settings: 'settingsScreen',
+};
+
+export const routeKey = {
+    restaurants: 'restaurants_screen',
+    map: 'map_screen',
+    settings: 'settings_screen',
 };
 
 export const tabActiveIcons = {
-    [routeName.restaurants]: 'ios-restaurant',
-    [routeName.map]: 'map',
-    [routeName.settings]: 'settings',
+    [tabRouteName.restaurantsTab]: 'ios-restaurant',
+    [tabRouteName.mapTab]: 'map',
+    [tabRouteName.settingsTab]: 'settings',
 };
 
 export const tabInactiveIcons = {
-    [routeName.restaurants]: 'restaurant-outline',
-    [routeName.map]: 'map-outline',
-    [routeName.settings]: 'settings-outline',
+    [tabRouteName.restaurantsTab]: 'restaurant-outline',
+    [tabRouteName.mapTab]: 'map-outline',
+    [tabRouteName.settingsTab]: 'settings-outline',
 };

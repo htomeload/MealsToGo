@@ -12,15 +12,16 @@ export const LocationContextProvider = ({ children }) => {
 
     let _timer = null;
 
-    const onSearch = (searchKeyword) => {
+    const handleSetKeyword = (value) => {
         setIsLoading(true);
+        setKeyword(value);
+    };
 
+    const onSearch = () => {
         _timer = setTimeout(async () => {
             try {
-                if (!searchKeyword?.length) return;
-
-                setKeyword(searchKeyword);
-                const result = await locationRequest(searchKeyword?.toLowerCase());
+                if (!keyword?.length) return;
+                const result = await locationRequest(keyword?.toLowerCase());
 
                 if (result) {
                     setLocation(locationTransform(result));
@@ -40,13 +41,17 @@ export const LocationContextProvider = ({ children }) => {
         return () => clearTimeout(_timer);
     }, []);
 
+    useEffect(() => {
+        onSearch?.();
+    }, [keyword]);
+
     return (
         <LocationContext.Provider
             value={{
                 isLocationLoading: isLoading,
                 error,
                 location,
-                searchLocation: onSearch,
+                searchLocation: handleSetKeyword,
                 keyword,
             }}
         >
