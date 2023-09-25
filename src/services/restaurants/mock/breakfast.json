@@ -1,0 +1,12 @@
+{
+    "title": "Breakfast",
+    "leftIcon": "bread-slice",
+    "list": [
+        {
+            "title": "Eggs Benedict"
+        },
+        {
+            "title": "Classic Breakfast"
+        }
+    ]
+}

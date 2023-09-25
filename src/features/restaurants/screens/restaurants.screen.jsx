@@ -10,6 +10,8 @@ import {
 } from './restaurants.styles';
 import Search from '../components/search.component';
 import { LocationContext } from '../../../services/location/location.context';
+import { TouchableOpacity } from 'react-native';
+import { routeName } from '../../../constants/app.constants';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -22,7 +24,7 @@ const mockRestaurantInfo = {
     isClosedTemporary: true,
 };
 
-export default function RestaurantsScreen() {
+export default function RestaurantsScreen({ navigation }) {
     const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
     const { isLocationLoading } = useContext(LocationContext);
 
@@ -41,9 +43,17 @@ export default function RestaurantsScreen() {
                         const { item, index } = flatItem;
 
                         return (
-                            <Spacer position={'bottom'} scale={'large'}>
-                                <RestaurantInfoCard restaurant={{ ...item }} />
-                            </Spacer>
+                            <TouchableOpacity
+                                onPress={() =>
+                                    navigation?.navigate?.(routeName?.restaurantDetail, {
+                                        restaurant: item,
+                                    })
+                                }
+                            >
+                                <Spacer position={'bottom'} scale={'large'}>
+                                    <RestaurantInfoCard restaurant={{ ...item }} />
+                                </Spacer>
+                            </TouchableOpacity>
                         );
                     }}
                     keyExtractor={(item) => item?.name}

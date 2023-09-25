@@ -7,14 +7,7 @@ import { tabRouteName, tabActiveIcons, tabInactiveIcons } from '../../constants/
 import { colors } from '../theme/colors';
 import Text from '../../components/typography/text.components';
 import RestaurantsNavigator from './restaurants.navigator';
-
-function MapScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Map!</Text>
-        </View>
-    );
-}
+import MapScreen from '../../features/map/screens/map.screen';
 
 function SettingsScreen() {
     return (

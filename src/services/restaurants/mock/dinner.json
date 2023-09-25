@@ -1,0 +1,15 @@
+{
+    "title": "Dinner",
+    "leftIcon": "food-variant",
+    "list": [
+        {
+            "title": "Spaghetti Bolognese"
+        },
+        {
+            "title": "Veal Cutlet with Chicken Mushroom Rotini"
+        },
+        {
+            "title": "Steak Frites"
+        }
+    ]
+}

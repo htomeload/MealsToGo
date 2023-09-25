@@ -1,0 +1,15 @@
+{
+    "title": "Lunch",
+    "leftIcon": "hamburger",
+    "list": [
+        {
+            "title": "Burger w/ Fries"
+        },
+        {
+            "title": "Steak Sandwich"
+        },
+        {
+            "title": "Mushroom Soup"
+        }
+    ]
+}

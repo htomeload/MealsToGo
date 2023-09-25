@@ -1,0 +1,21 @@
+{
+    "title": "Drinks",
+    "leftIcon": "cup",
+    "list": [
+        {
+            "title": "Coffee"
+        },
+        {
+            "title": "Tea"
+        },
+        {
+            "title": "Modelo"
+        },
+        {
+            "title": "Coke"
+        },
+        {
+            "title": "Fanta"
+        }
+    ]
+}
