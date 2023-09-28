@@ -16,6 +16,7 @@ import {
     Title,
 } from './restaurant-info-card.styles';
 import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
+import Favorite from '../../../components/favorites/favorite.component';
 
 const PHOTO_PLACEHOLDER = 'https://i.imgur.com/4q0Jo6G.jpg';
 
@@ -30,6 +31,7 @@ export default function RestaurantInfoCard({ restaurant }) {
 
     return (
         <RestaurantCard elevation={5}>
+            <Favorite restaurant={restaurant} />
             <RestaurantCardCover
                 resizeMethod="scale"
                 resizeMode="cover"

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import RestaurantInfoCard from '../components/restaurant-info-card.components';
 import Spacer from '../../../components/spacer/Spacer.components';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
@@ -12,6 +12,8 @@ import Search from '../components/search.component';
 import { LocationContext } from '../../../services/location/location.context';
 import { TouchableOpacity } from 'react-native';
 import { routeName } from '../../../constants/app.constants';
+import FavoritesBar from '../../../components/favorites/favorites-bar.component';
+import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -28,11 +30,19 @@ export default function RestaurantsScreen({ navigation }) {
     const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
     const { isLocationLoading } = useContext(LocationContext);
 
+    const [isToggled, setIsToggled] = useState(false);
+
     const isLoading = isRestaurantLoading || isLocationLoading;
 
     return (
         <RestaurantsScreenContainer>
-            <Search />
+            <Search
+                isFavoritesToggled={isToggled}
+                onFavoritesToggled={() => setIsToggled?.(!isToggled)}
+            />
+            <ViewVisibility isVisible={isToggled}>
+                <FavoritesBar />
+            </ViewVisibility>
             <ViewVisibilityStyled isVisible={isLoading}>
                 <LoadingIndicator />
             </ViewVisibilityStyled>

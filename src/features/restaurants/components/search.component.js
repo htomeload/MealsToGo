@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { SearchBarContainer, SearchbarStyled } from '../screens/restaurants.styles';
 import { LocationContext } from '../../../services/location/location.context';
 
-export default function Search() {
+export default function Search({ isFavoritesToggled, onFavoritesToggled }) {
     const { keyword, searchLocation } = useContext(LocationContext);
 
     const [searchKeyword, setSearchKeyword] = useState(keyword);
@@ -14,6 +14,8 @@ export default function Search() {
     return (
         <SearchBarContainer>
             <SearchbarStyled
+                icon={isFavoritesToggled ? 'heart' : 'heart-outline'}
+                onIconPress={() => onFavoritesToggled?.()}
                 placeholder="Search for the location"
                 value={searchKeyword}
                 onSubmitEditing={() => searchLocation?.(searchKeyword)}

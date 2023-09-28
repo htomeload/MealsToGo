@@ -5,18 +5,22 @@ import Search from '../components/search.component';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { LocationContext } from '../../../services/location/location.context';
 import { Marker } from 'react-native-maps';
+import MapCallout from '../components/map-callout.component';
+import { routeName } from '../../../constants/app.constants';
 
-export default function MapScreen(props) {
+export default function MapScreen({ navigation }) {
     const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
     const { location, isLocationLoading } = useContext(LocationContext);
 
     const [latDelta, setLatDelta] = useState(0);
 
-    const { lat, lng, viewport } = location;
+    const lat = location?.lat ?? 0;
+    const lng = location?.lng ?? 0;
+    const viewport = location?.viewport ?? {};
 
     useEffect(() => {
-        const northeastLat = viewport?.northeast?.lat;
-        const southwestLat = viewport?.southwest?.lat;
+        const northeastLat = viewport?.northeast?.lat ?? 0;
+        const southwestLat = viewport?.southwest?.lat ?? 0;
 
         const _latDelta = northeastLat - southwestLat;
 
@@ -41,7 +45,15 @@ export default function MapScreen(props) {
                             latitude: restaurant?.geometry?.location?.lat,
                             longitude: restaurant?.geometry?.location?.lng,
                         }}
-                    />
+                        title={restaurant?.name}
+                    >
+                        <MapCallout
+                            restaurant={restaurant}
+                            onPress={() =>
+                                navigation?.navigate?.(routeName.restaurantDetail, { restaurant })
+                            }
+                        />
+                    </Marker>
                 ))}
             </MapViewFullScreen>
         </MapScreenContainer>
