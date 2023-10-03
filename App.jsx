@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SaferAreaView from './src/components/safer-area-view/SaferAreaView';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infrastructure/theme';
@@ -11,9 +11,16 @@ import { LocationContextProvider } from './src/services/location/location.contex
 import Navigation from './src/infrastructure/navigation';
 import { FavoritesContextProvider } from './src/services/favorites/favorites.context';
 
+import { initializeApp } from 'firebase/app';
+import { firebaseConfigs } from './src/constants/app.constants';
+import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
+
 const SaferAreaViewStyled = styled(SaferAreaView)`
     flex: 1;
 `;
+
+// Initialize Firebase
+initializeApp(firebaseConfigs.initializeAppConfigs, firebaseConfigs.appName);
 
 export default function App() {
     const [oswaldLoaded] = useOswaldFonts({
@@ -29,13 +36,15 @@ export default function App() {
     return (
         <SaferAreaViewStyled>
             <ThemeProvider theme={theme}>
-                <FavoritesContextProvider>
-                    <LocationContextProvider>
-                        <RestaurantContextProvider>
-                            <Navigation />
-                        </RestaurantContextProvider>
-                    </LocationContextProvider>
-                </FavoritesContextProvider>
+                <AuthenticationContextProvider>
+                    <FavoritesContextProvider>
+                        <LocationContextProvider>
+                            <RestaurantContextProvider>
+                                <Navigation />
+                            </RestaurantContextProvider>
+                        </LocationContextProvider>
+                    </FavoritesContextProvider>
+                </AuthenticationContextProvider>
             </ThemeProvider>
         </SaferAreaViewStyled>
     );

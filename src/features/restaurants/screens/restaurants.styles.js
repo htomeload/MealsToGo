@@ -24,3 +24,7 @@ export const SearchbarStyled = styled(Searchbar)`
 export const ViewVisibilityStyled = styled(ViewVisibility)`
     flex: 1;
 `;
+
+export const FavoritesBarWrapper = styled(ViewVisibility)`
+    ${({ isVisible }) => (isVisible ? `flex: 0.6;` : `flex: 0;`)}
+`;

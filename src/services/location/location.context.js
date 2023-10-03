@@ -8,7 +8,7 @@ export const LocationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [location, setLocation] = useState(null);
-    const [keyword, setKeyword] = useState('');
+    const [keyword, setKeyword] = useState('Antwerp');
 
     let _timer = null;
 

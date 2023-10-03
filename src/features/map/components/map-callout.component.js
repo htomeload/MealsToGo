@@ -5,7 +5,7 @@ import { Callout } from 'react-native-maps';
 export default function MapCallout({ restaurant, onPress }) {
     return (
         <Callout onPress={onPress}>
-            <CompactRestaurantInfo restaurant={restaurant} />
+            <CompactRestaurantInfo restaurant={restaurant} isMap={true} />
         </Callout>
     );
 }

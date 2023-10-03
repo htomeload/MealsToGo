@@ -5,17 +5,21 @@ export const tabRouteName = {
 };
 
 export const routeName = {
+    account: 'accountScreen',
     restaurants: 'restaurantsScreen',
     map: 'mapScreen',
     settings: 'settingsScreen',
     restaurantDetail: 'restaurantDetailScreen',
+    login: 'loginScreen',
 };
 
 export const routeKey = {
+    account: 'account_screen',
     restaurants: 'restaurants_screen',
     map: 'map_screen',
     settings: 'settings_screen',
     restaurantDetail: 'restaurant_detail_screen',
+    login: 'login_screen',
 };
 
 export const tabActiveIcons = {

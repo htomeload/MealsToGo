@@ -4,6 +4,7 @@ import Spacer from '../../../components/spacer/Spacer.components';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { LoadingIndicator } from '../../../components/loading-indicator/LoadingIndicator.components';
 import {
+    FavoritesBarWrapper,
     RestaurantListContainer,
     RestaurantsScreenContainer,
     ViewVisibilityStyled,
@@ -14,6 +15,7 @@ import { TouchableOpacity } from 'react-native';
 import { routeName } from '../../../constants/app.constants';
 import FavoritesBar from '../../../components/favorites/favorites-bar.component';
 import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
+import { FavoritesContext } from '../../../services/favorites/favorites.context';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -29,10 +31,17 @@ const mockRestaurantInfo = {
 export default function RestaurantsScreen({ navigation }) {
     const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
     const { isLocationLoading } = useContext(LocationContext);
+    const { favorites } = useContext(FavoritesContext);
 
     const [isToggled, setIsToggled] = useState(false);
 
     const isLoading = isRestaurantLoading || isLocationLoading;
+
+    const onNavigate = (item) => {
+        navigation?.navigate?.(routeName?.restaurantDetail, {
+            restaurant: item,
+        });
+    };
 
     return (
         <RestaurantsScreenContainer>
@@ -40,9 +49,9 @@ export default function RestaurantsScreen({ navigation }) {
                 isFavoritesToggled={isToggled}
                 onFavoritesToggled={() => setIsToggled?.(!isToggled)}
             />
-            <ViewVisibility isVisible={isToggled}>
-                <FavoritesBar />
-            </ViewVisibility>
+            <FavoritesBarWrapper isVisible={isToggled && favorites?.length}>
+                <FavoritesBar favorites={favorites} onPressItem={onNavigate} />
+            </FavoritesBarWrapper>
             <ViewVisibilityStyled isVisible={isLoading}>
                 <LoadingIndicator />
             </ViewVisibilityStyled>
@@ -53,13 +62,7 @@ export default function RestaurantsScreen({ navigation }) {
                         const { item, index } = flatItem;
 
                         return (
-                            <TouchableOpacity
-                                onPress={() =>
-                                    navigation?.navigate?.(routeName?.restaurantDetail, {
-                                        restaurant: item,
-                                    })
-                                }
-                            >
+                            <TouchableOpacity onPress={() => onNavigate?.(item)}>
                                 <Spacer position={'bottom'} scale={'large'}>
                                     <RestaurantInfoCard restaurant={{ ...item }} />
                                 </Spacer>
