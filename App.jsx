@@ -12,7 +12,7 @@ import Navigation from './src/infrastructure/navigation';
 import { FavoritesContextProvider } from './src/services/favorites/favorites.context';
 
 import { initializeApp } from 'firebase/app';
-import { firebaseConfigs } from './src/constants/app.constants';
+import { firebaseConfigs } from './src/constants/firebase.constants';
 import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
 
 const SaferAreaViewStyled = styled(SaferAreaView)`
