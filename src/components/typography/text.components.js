@@ -2,9 +2,7 @@ import React from 'react';
 import { Text as ReactNativeText } from 'react-native';
 import styled from 'styled-components';
 
-const textCenter = `
-    text-align: center;
-`;
+const textCenter = `text-align: center;`;
 
 const defaultTextStyles = (theme, center = false) => `
     font-family: ${theme?.fonts?.body};
@@ -53,9 +51,15 @@ const TextStyled = styled(ReactNativeText)`
     ${({ variant, center, theme }) => variants?.[variant](theme, center)}
 `;
 
-export default function Text({ variant = 'body', center = false, numberOfLines = 1, children }) {
+export default function Text({
+    variant = 'body',
+    center = false,
+    numberOfLines = 1,
+    style = {},
+    children,
+}) {
     return (
-        <TextStyled variant={variant} center={center} numberOfLines={numberOfLines}>
+        <TextStyled variant={variant} center={center} numberOfLines={numberOfLines} style={style}>
             {children}
         </TextStyled>
     );

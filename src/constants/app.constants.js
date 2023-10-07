@@ -11,6 +11,7 @@ export const routeName = {
     settings: 'settingsScreen',
     restaurantDetail: 'restaurantDetailScreen',
     login: 'loginScreen',
+    register: 'registerScreen',
 };
 
 export const routeKey = {
@@ -20,6 +21,7 @@ export const routeKey = {
     settings: 'settings_screen',
     restaurantDetail: 'restaurant_detail_screen',
     login: 'login_screen',
+    register: 'register_screen',
 };
 
 export const tabActiveIcons = {
