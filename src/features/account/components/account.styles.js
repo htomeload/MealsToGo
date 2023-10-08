@@ -58,7 +58,7 @@ export const EmailInput = styled(TextInput).attrs({
     numberOfLines: 1,
     autoCapitalize: 'none',
 })`
-    width: ${Dimensions.get('screen').width * 0.65}px;
+    min-width: ${Dimensions.get('screen').width * 0.65}px;
 `;
 
 export const PasswordInput = styled(TextInput).attrs({
@@ -68,7 +68,7 @@ export const PasswordInput = styled(TextInput).attrs({
     secureTextEntry: true,
     autoCapitalize: 'none',
 })`
-    width: ${Dimensions.get('screen').width * 0.65}px;
+    min-width: ${Dimensions.get('screen').width * 0.65}px;
 `;
 
 export const ConfirmPasswordInput = styled(TextInput).attrs({
@@ -78,7 +78,7 @@ export const ConfirmPasswordInput = styled(TextInput).attrs({
     secureTextEntry: true,
     autoCapitalize: 'none',
 })`
-    width: ${Dimensions.get('screen').width * 0.65}px;
+    min-width: ${Dimensions.get('screen').width * 0.65}px;
 `;
 
 export const Title = styled(Text).attrs({

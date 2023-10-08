@@ -13,9 +13,10 @@ import {
 import Spacer from '../../../components/spacer/Spacer.components';
 import { AuthenticationContext } from '../../../services/authentication/authentication.context';
 import Text from '../../../components/typography/text.components';
+import Loading from '../../../components/loading/loading.component';
 
 export default function RegisterScreen({ navigation }) {
-    const { onRegister, error, clearError } = useContext(AuthenticationContext);
+    const { onRegister, error, clearError, isAuthLoading } = useContext(AuthenticationContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,12 +53,18 @@ export default function RegisterScreen({ navigation }) {
                     </Spacer>
                     {error && (
                         <Spacer position={'bottom'} scale={'medium'}>
-                            <Text variant="error">{error}</Text>
+                            <Text variant="error" numberOfLines={3}>
+                                {error}
+                            </Text>
                         </Spacer>
                     )}
-                    <Spacer position={'bottom'} scale={'medium'}>
-                        <RegisterButton onPress={handleOnRegister}>Register</RegisterButton>
-                    </Spacer>
+                    {!isAuthLoading ? (
+                        <Spacer position={'bottom'} scale={'medium'}>
+                            <RegisterButton onPress={handleOnRegister}>Register</RegisterButton>
+                        </Spacer>
+                    ) : (
+                        <Loading isVisible={isAuthLoading} />
+                    )}
                 </AccountContainer>
                 <Spacer position={'top'} scale={'medium'}>
                     <AccountButton onPress={handleBack}>Back</AccountButton>

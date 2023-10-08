@@ -14,7 +14,6 @@ import { LocationContext } from '../../../services/location/location.context';
 import { TouchableOpacity } from 'react-native';
 import { routeName } from '../../../constants/app.constants';
 import FavoritesBar from '../../../components/favorites/favorites-bar.component';
-import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
 import { FavoritesContext } from '../../../services/favorites/favorites.context';
 
 const mockRestaurantInfo = {

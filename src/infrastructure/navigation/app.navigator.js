@@ -1,20 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { tabRouteName, tabActiveIcons, tabInactiveIcons } from '../../constants/app.constants';
 import { colors } from '../theme/colors';
-import Text from '../../components/typography/text.components';
 import RestaurantsNavigator from './restaurants.navigator';
 import MapScreen from '../../features/map/screens/map.screen';
-
-function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
-}
+import SettingsScreen from '../../features/settings/screens/settings.screen';
 
 const Tab = createBottomTabNavigator();
 

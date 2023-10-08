@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components';
 import { colors } from '../../infrastructure/theme/colors';
 

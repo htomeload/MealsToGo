@@ -18,16 +18,20 @@ export const AuthenticationContextProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        _saveUserInfo?.();
+        _onUserInfoChange?.();
     }, [user]);
 
     useEffect(() => {
+        _onInitializedFirebaseApp();
+    }, [app]);
+
+    const _onInitializedFirebaseApp = () => {
         if (app) {
             const _auth = initializeAuth(app, { persistence: inMemoryPersistence });
 
             setAuth(_auth);
         }
-    }, [app]);
+    };
 
     const _onMount = async () => {
         const user = await AsyncStorage.getItem('user');
@@ -38,9 +42,15 @@ export const AuthenticationContextProvider = ({ children }) => {
         }
     };
 
-    const _saveUserInfo = async () => {
+    const _onUserInfoChange = async () => {
         if (user) {
             await AsyncStorage.setItem('user', JSON.stringify(user));
+        } else {
+            const _user = await AsyncStorage.getItem('user');
+
+            if (_user) {
+                await AsyncStorage.removeItem('user');
+            }
         }
     };
 
@@ -61,6 +71,7 @@ export const AuthenticationContextProvider = ({ children }) => {
             setIsLoading(false);
         } catch (error) {
             setError(error?.toString());
+            setIsLoading(false);
         }
     };
 
@@ -80,10 +91,12 @@ export const AuthenticationContextProvider = ({ children }) => {
                 }
             } else {
                 setError('Error: Passwords do not match');
-                setIsLoading(false);
             }
+
+            setIsLoading(false);
         } catch (error) {
             setError(error?.toString());
+            setIsLoading(false);
         }
     };
 

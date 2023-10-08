@@ -12,9 +12,10 @@ import {
 import Spacer from '../../../components/spacer/Spacer.components';
 import { AuthenticationContext } from '../../../services/authentication/authentication.context';
 import Text from '../../../components/typography/text.components';
+import Loading from '../../../components/loading/loading.component';
 
 export default function LoginScreen({ navigation }) {
-    const { onLogin, error, clearError } = useContext(AuthenticationContext);
+    const { onLogin, error, clearError, isAuthLoading } = useContext(AuthenticationContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -44,12 +45,18 @@ export default function LoginScreen({ navigation }) {
                     </Spacer>
                     {error && (
                         <Spacer position={'bottom'} scale={'medium'}>
-                            <Text variant="error">{error}</Text>
+                            <Text variant="error" numberOfLines={3}>
+                                {error}
+                            </Text>
                         </Spacer>
                     )}
-                    <Spacer position={'bottom'} scale={'medium'}>
-                        <AuthButton onPress={handleOnLogin}>Login</AuthButton>
-                    </Spacer>
+                    {!isAuthLoading ? (
+                        <Spacer position={'bottom'} scale={'medium'}>
+                            <AuthButton onPress={handleOnLogin}>Login</AuthButton>
+                        </Spacer>
+                    ) : (
+                        <Loading isVisible={isAuthLoading} />
+                    )}
                 </AccountContainer>
                 <Spacer position={'top'} scale={'medium'}>
                     <AccountButton onPress={handleBack}>Back</AccountButton>
