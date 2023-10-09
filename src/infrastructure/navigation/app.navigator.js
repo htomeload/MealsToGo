@@ -6,6 +6,9 @@ import { colors } from '../theme/colors';
 import RestaurantsNavigator from './restaurants.navigator';
 import MapScreen from '../../features/map/screens/map.screen';
 import SettingsScreen from '../../features/settings/screens/settings.screen';
+import { FavoritesContextProvider } from '../../services/favorites/favorites.context';
+import { LocationContextProvider } from '../../services/location/location.context';
+import { RestaurantContextProvider } from '../../services/restaurants/restaurants.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,5 +38,13 @@ function AppTabs() {
 }
 
 export default function AppNavigator() {
-    return <AppTabs />;
+    return (
+        <FavoritesContextProvider>
+            <LocationContextProvider>
+                <RestaurantContextProvider>
+                    <AppTabs />
+                </RestaurantContextProvider>
+            </LocationContextProvider>
+        </FavoritesContextProvider>
+    );
 }

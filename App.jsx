@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SaferAreaView from './src/components/safer-area-view/SaferAreaView';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infrastructure/theme';
@@ -6,10 +6,7 @@ import { theme } from './src/infrastructure/theme';
 import { useFonts as useOswaldFonts, Oswald_400Regular } from '@expo-google-fonts/oswald';
 import { useFonts as useLatoFonts, Lato_400Regular } from '@expo-google-fonts/lato';
 
-import { RestaurantContextProvider } from './src/services/restaurants/restaurants.context';
-import { LocationContextProvider } from './src/services/location/location.context';
 import Navigation from './src/infrastructure/navigation';
-import { FavoritesContextProvider } from './src/services/favorites/favorites.context';
 
 import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
 
@@ -32,13 +29,7 @@ export default function App() {
         <SaferAreaViewStyled>
             <ThemeProvider theme={theme}>
                 <AuthenticationContextProvider>
-                    <FavoritesContextProvider>
-                        <LocationContextProvider>
-                            <RestaurantContextProvider>
-                                <Navigation />
-                            </RestaurantContextProvider>
-                        </LocationContextProvider>
-                    </FavoritesContextProvider>
+                    <Navigation />
                 </AuthenticationContextProvider>
             </ThemeProvider>
         </SaferAreaViewStyled>

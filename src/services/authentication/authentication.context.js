@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { loginRequest, registerRequest } from './authentication.service';
-import { inMemoryPersistence, initializeAuth } from 'firebase/auth';
+import { inMemoryPersistence, initializeAuth, signOut } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthenticationContext = createContext();
@@ -13,18 +13,6 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [auth, setAuth] = useState(null);
     const [app, setApp] = useState(null);
 
-    useEffect(() => {
-        _onMount?.();
-    }, []);
-
-    useEffect(() => {
-        _onUserInfoChange?.();
-    }, [user]);
-
-    useEffect(() => {
-        _onInitializedFirebaseApp();
-    }, [app]);
-
     const _onInitializedFirebaseApp = () => {
         if (app) {
             const _auth = initializeAuth(app, { persistence: inMemoryPersistence });
@@ -34,7 +22,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     };
 
     const _onMount = async () => {
-        const user = await AsyncStorage.getItem('user');
+        const user = await AsyncStorage.getItem('@user');
 
         if (user) {
             setUser(JSON.parse(user));
@@ -44,12 +32,12 @@ export const AuthenticationContextProvider = ({ children }) => {
 
     const _onUserInfoChange = async () => {
         if (user) {
-            await AsyncStorage.setItem('user', JSON.stringify(user));
+            await AsyncStorage.setItem('@user', JSON.stringify(user));
         } else {
-            const _user = await AsyncStorage.getItem('user');
+            const _user = await AsyncStorage.getItem('@user');
 
             if (_user) {
-                await AsyncStorage.removeItem('user');
+                await AsyncStorage.removeItem('@user');
             }
         }
     };
@@ -102,12 +90,25 @@ export const AuthenticationContextProvider = ({ children }) => {
 
     const onLogout = () => {
         setUser(null);
+        signOut(auth);
         setIsAuthenticated(false);
     };
 
     const clearError = () => {
         setError(null);
     };
+
+    useEffect(() => {
+        _onMount();
+    }, []);
+
+    useEffect(() => {
+        _onUserInfoChange();
+    }, [user]);
+
+    useEffect(() => {
+        _onInitializedFirebaseApp();
+    }, [app]);
 
     return (
         <AuthenticationContext.Provider
