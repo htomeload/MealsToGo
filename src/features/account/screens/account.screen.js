@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     AccountContainer,
+    AnimationWrapper,
     AuthButton,
     BackgroundFullScreen,
     RegisterButton,
@@ -9,6 +10,7 @@ import {
 } from '../components/account.styles';
 import Spacer from '../../../components/spacer/Spacer.components';
 import { routeName } from '../../../constants/app.constants';
+import AnimatedLottieView from 'lottie-react-native';
 
 export default function AccountScreen({ navigation }) {
     const navigateToLoginScreen = () => {
@@ -22,7 +24,16 @@ export default function AccountScreen({ navigation }) {
     return (
         <BackgroundFullScreen>
             <ViewFullScreen>
-                <Title>Meal To Go</Title>
+                <AnimationWrapper>
+                    <AnimatedLottieView
+                        key={'animation'}
+                        autoPlay
+                        loop
+                        resizeMode="cover"
+                        source={require('../../../../assets/watermelon.json')}
+                    />
+                </AnimationWrapper>
+                <Title>Meals To Go</Title>
                 <AccountContainer>
                     <Spacer position={'top'} scale={'medium'}>
                         <AuthButton onPress={navigateToLoginScreen}>Login</AuthButton>

@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 
 const SafeAreaViewStyled = styled(SafeAreaView)`
     padding-top: ${Platform?.OS === 'android' ? StatusBar?.currentHeight : 0}px;
+    background-color: ${(props) => props.theme?.colors?.bg?.primary};
 `;
 
 export default function SaferAreaView(props) {

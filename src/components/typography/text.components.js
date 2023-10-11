@@ -37,12 +37,18 @@ const label = (theme) => `
     font-weight: ${theme?.fontWeights?.medium};
 `;
 
+const title = (theme) => `
+    font-size: ${theme?.fontSizes?.title};
+    font-weight: ${theme?.fontWeights?.bold};
+`;
+
 const variants = {
     body,
     hint,
     error,
     caption,
     label,
+    title,
 };
 
 const TextStyled = styled(ReactNativeText)`

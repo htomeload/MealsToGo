@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
     return (
         <BackgroundFullScreen>
             <ViewFullScreen>
-                <Title>Meal To Go</Title>
+                <Title>Meals To Go</Title>
                 <AccountContainer>
                     <Spacer position={'bottom'} scale={'medium'}>
                         <EmailInput value={email} onChangeText={(text) => setEmail(text)} />

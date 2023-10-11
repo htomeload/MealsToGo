@@ -16,7 +16,7 @@ export const ViewFullScreen = styled(View)`
 `;
 
 export const BackgroundFullScreen = styled(ImageBackground).attrs({
-    source: require('../../../assets/imgs/home_bg.jpg'),
+    source: require('../../../../assets/home_bg.jpg'),
 })`
     flex: 1;
     align-items: center;
@@ -82,5 +82,13 @@ export const ConfirmPasswordInput = styled(TextInput).attrs({
 `;
 
 export const Title = styled(Text).attrs({
-    variant: 'body',
+    variant: 'title',
 })``;
+
+export const AnimationWrapper = styled(View)`
+    width: ${Dimensions.get('screen').width}px;
+    height: ${Dimensions.get('screen').height * 0.4}px;
+    position: absolute;
+    top: 30px;
+    padding: ${(props) => props.theme?.space?.[2]};
+`;
