@@ -17,8 +17,8 @@ import Loading from '../../../components/loading/loading.component';
 export default function LoginScreen({ navigation }) {
     const { onLogin, error, clearError, isAuthLoading } = useContext(AuthenticationContext);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('mealtogo@email.com');
+    const [password, setPassword] = useState('123456');
 
     const handleOnLogin = () => {
         onLogin?.(email, password);

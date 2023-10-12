@@ -8,10 +8,11 @@ export const routeName = {
     account: 'accountScreen',
     restaurants: 'restaurantsScreen',
     map: 'mapScreen',
-    settings: 'settingsScreen',
+    settings: 'App Settings',
     restaurantDetail: 'restaurantDetailScreen',
     login: 'loginScreen',
     register: 'registerScreen',
+    favorites: 'Favorites',
 };
 
 export const routeKey = {
@@ -22,6 +23,7 @@ export const routeKey = {
     restaurantDetail: 'restaurant_detail_screen',
     login: 'login_screen',
     register: 'register_screen',
+    favorites: 'favorites_screen',
 };
 
 export const tabActiveIcons = {

@@ -5,10 +5,10 @@ import { tabRouteName, tabActiveIcons, tabInactiveIcons } from '../../constants/
 import { colors } from '../theme/colors';
 import RestaurantsNavigator from './restaurants.navigator';
 import MapScreen from '../../features/map/screens/map.screen';
-import SettingsScreen from '../../features/settings/screens/settings.screen';
 import { FavoritesContextProvider } from '../../services/favorites/favorites.context';
 import { LocationContextProvider } from '../../services/location/location.context';
 import { RestaurantContextProvider } from '../../services/restaurants/restaurants.context';
+import SettingsNavigator from './settings.navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +32,7 @@ function AppTabs() {
         <Tab.Navigator initialRouteName="Restaurants" screenOptions={createScreenOptions}>
             <Tab.Screen name={tabRouteName.restaurantsTab} component={RestaurantsNavigator} />
             <Tab.Screen name={tabRouteName.mapTab} component={MapScreen} />
-            <Tab.Screen name={tabRouteName.settingsTab} component={SettingsScreen} />
+            <Tab.Screen name={tabRouteName.settingsTab} component={SettingsNavigator} />
         </Tab.Navigator>
     );
 }
