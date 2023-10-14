@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import RestaurantInfoCard from '../restaurants/components/restaurant-info-card.components';
 import RestaurantMenuList from './components/restaurant-menu-list.component';
 import { mockMenus } from '../../services/restaurants/mock';
-import { FlatList, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
+import RestaurantInfoCard from '../../components/restaurant-info-card/restaurant-info-card.components';
 
 export default function RestaurantDetailScreen({ navigation, route }) {
     const { restaurant } = route?.params;

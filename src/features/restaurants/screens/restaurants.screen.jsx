@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import RestaurantInfoCard from '../components/restaurant-info-card.components';
+import RestaurantInfoCard from '../../../components/restaurant-info-card/restaurant-info-card.components';
 import Spacer from '../../../components/spacer/Spacer.components';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { LoadingIndicator } from '../../../components/loading-indicator/LoadingIndicator.components';

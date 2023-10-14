@@ -1,8 +1,8 @@
 import React from 'react';
 import { SvgXml } from 'react-native-svg';
-import star from './../../../../assets/star';
-import open from './../../../../assets/open';
-import Spacer from '../../../components/spacer/Spacer.components';
+import star from '../../../assets/star';
+import open from '../../../assets/open';
+import Spacer from '../spacer/Spacer.components';
 
 import {
     CategoryIcon,
@@ -15,8 +15,8 @@ import {
     SectionEnd,
     Title,
 } from './restaurant-info-card.styles';
-import ViewVisibility from '../../../components/view-visibility/ViewVisibility.components';
-import Favorite from '../../../components/favorites/favorite.component';
+import ViewVisibility from '../view-visibility/ViewVisibility.components';
+import Favorite from '../favorites/favorite.component';
 
 const PHOTO_PLACEHOLDER = 'https://i.imgur.com/4q0Jo6G.jpg';
 

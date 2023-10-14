@@ -1,6 +1,6 @@
 import { View, Image } from 'react-native';
 import styled from 'styled-components/native';
-import Text from '../../../components/typography/text.components';
+import Text from '../typography/text.components';
 import { Card } from 'react-native-paper';
 
 export const CategoryIcon = styled(Image)`
