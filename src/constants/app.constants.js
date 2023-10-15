@@ -13,6 +13,7 @@ export const routeName = {
     login: 'loginScreen',
     register: 'registerScreen',
     favorites: 'Favorites',
+    camera: 'CameraScreen',
 };
 
 export const routeKey = {
@@ -24,6 +25,7 @@ export const routeKey = {
     login: 'login_screen',
     register: 'register_screen',
     favorites: 'favorites_screen',
+    camera: 'camera_screen',
 };
 
 export const tabActiveIcons = {

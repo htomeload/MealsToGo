@@ -15,6 +15,7 @@ import { TouchableOpacity } from 'react-native';
 import { routeName } from '../../../constants/app.constants';
 import FavoritesBar from '../../../components/favorites/favorites-bar.component';
 import { FavoritesContext } from '../../../services/favorites/favorites.context';
+import { FadeInView } from '../../../components/animations/fade.animation';
 
 const mockRestaurantInfo = {
     name: 'Default Name',
@@ -62,9 +63,11 @@ export default function RestaurantsScreen({ navigation }) {
 
                         return (
                             <TouchableOpacity onPress={() => onNavigate?.(item)}>
-                                <Spacer position={'bottom'} scale={'large'}>
-                                    <RestaurantInfoCard restaurant={{ ...item }} />
-                                </Spacer>
+                                <FadeInView style={{ flex: 1 }}>
+                                    <Spacer position={'bottom'} scale={'large'}>
+                                        <RestaurantInfoCard restaurant={{ ...item }} />
+                                    </Spacer>
+                                </FadeInView>
                             </TouchableOpacity>
                         );
                     }}

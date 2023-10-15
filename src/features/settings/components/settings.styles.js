@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { Avatar, List } from 'react-native-paper';
 import styled from 'styled-components';
 import Text from '../../../components/typography/text.components';
+import { TouchableOpacity } from 'react-native';
 
 export const SettingScreenContainer = styled(View)`
     flex: 1;
@@ -20,7 +21,7 @@ export const UserIcon = styled(Avatar.Icon).attrs({
     background-color: #2182bd;
 `;
 
-export const UserIconWrapper = styled(View)`
+export const UserIconWrapper = styled(TouchableOpacity)`
     align-items: center;
 `;
 
