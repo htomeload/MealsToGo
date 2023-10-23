@@ -22,7 +22,6 @@ export const LocationContextProvider = ({ children }) => {
             try {
                 if (!keyword?.length) return;
                 const result = await locationRequest(keyword?.toLowerCase());
-
                 if (result) {
                     setLocation(locationTransform(result));
                 }

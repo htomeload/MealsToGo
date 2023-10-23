@@ -32,6 +32,9 @@ export default function SettingsNavigator() {
                 name={routeName.camera}
                 navigationKey={routeKey.camera}
                 component={CameraScreen}
+                options={{
+                    headerShown: true,
+                }}
             />
         </SettingsStack.Navigator>
     );

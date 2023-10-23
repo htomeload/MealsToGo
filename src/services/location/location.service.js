@@ -1,14 +1,14 @@
 import camelize from 'camelize';
-import { locations } from './location.mock';
+import { apiRoutes } from '../../constants/api.constants';
 
-export const locationRequest = (searchTerm) => {
-    return new Promise((resolve, reject) => {
-        const locationMock = locations?.[searchTerm];
-        if (!locationMock) {
-            reject('no location');
-        }
-        resolve(locationMock);
-    });
+export const locationRequest = async (searchTerm) => {
+    try {
+        const result = await fetch(apiRoutes.geocode(searchTerm));
+        return result?.json();
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 };
 
 export const locationTransform = (result) => {

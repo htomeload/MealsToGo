@@ -13,7 +13,7 @@ export const routeName = {
     login: 'loginScreen',
     register: 'registerScreen',
     favorites: 'Favorites',
-    camera: 'CameraScreen',
+    camera: 'Camera',
 };
 
 export const routeKey = {

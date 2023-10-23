@@ -33,4 +33,12 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
 src/constants/firebase.constants.js
+src/constants/api.constants.js
+
+*/node_modules/**/*
+
+.firebaserc
+firebase.json
+functions/

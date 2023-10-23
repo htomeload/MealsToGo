@@ -28,3 +28,9 @@ export const UserIconWrapper = styled(TouchableOpacity)`
 export const UserEmailText = styled(Text).attrs({
     variant: 'label',
 })``;
+
+export const UserImage = styled(Avatar.Image).attrs({
+    size: 180,
+})`
+    background-color: #2182bd;
+`;
