@@ -17,23 +17,21 @@ export const LocationContextProvider = ({ children }) => {
         setKeyword(value);
     };
 
-    const onSearch = () => {
-        _timer = setTimeout(async () => {
-            try {
-                if (!keyword?.length) return;
-                const result = await locationRequest(keyword?.toLowerCase());
-                if (result) {
-                    setLocation(locationTransform(result));
-                }
-
-                setIsLoading(false);
-                clearTimeout(_timer);
-            } catch (error) {
-                setIsLoading(false);
-                setError(error);
-                clearTimeout(_timer);
+    const onSearch = async () => {
+        try {
+            if (!keyword?.length) return;
+            const result = await locationRequest(keyword?.toLowerCase());
+            if (result) {
+                setLocation(locationTransform(result));
             }
-        }, 1000);
+
+            setIsLoading(false);
+            clearTimeout(_timer);
+        } catch (error) {
+            setIsLoading(false);
+            setError(error);
+            clearTimeout(_timer);
+        }
     };
 
     useEffect(() => {

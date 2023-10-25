@@ -1,24 +1,18 @@
 import camelize from 'camelize';
-import { mocks, mockImages } from './mock';
+import { apiRoutes } from '../../constants/api.constants';
 
-export const restaurantRequest = (location) => {
-    return new Promise((resolve, reject) => {
-        try {
-            const mock = mocks?.[location];
-            if (!mock) reject('not found');
-            resolve(mock);
-        } catch (error) {
-            reject(error);
-        }
-    });
+export const restaurantRequest = async (location) => {
+    try {
+        const result = await fetch(apiRoutes.placesNearby(location));
+        return result?.json();
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 };
 
 export const restaurantsTransform = ({ results = [] }) => {
     const mappedResult = results?.map((restaurant) => {
-        restaurant.photos = restaurant.photos.map((p) => {
-            return mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];
-        });
-
         return {
             ...restaurant,
             address: restaurant?.vicinity,

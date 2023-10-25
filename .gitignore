@@ -36,6 +36,8 @@ yarn-error.*
 
 src/constants/firebase.constants.js
 src/constants/api.constants.js
+src/utils/api.js
+src/utils/env.js
 
 */node_modules/**/*
 

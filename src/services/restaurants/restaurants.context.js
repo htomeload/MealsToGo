@@ -13,28 +13,27 @@ export const RestaurantContextProvider = ({ children }) => {
 
     let _timer = null;
 
-    const fetchRestaurants = (latlng) => {
-        setIsLoading(true);
+    const fetchRestaurants = async (latlng) => {
+        try {
+            setIsLoading(true);
+            setRestaurants([]);
 
-        _timer = setTimeout(async () => {
-            try {
-                const result = await restaurantRequest(latlng);
-
-                if (result?.results) {
-                    const transformedResult = restaurantsTransform(result);
-                    setRestaurants(transformedResult);
-                } else {
-                    setError(result);
-                }
-
-                setIsLoading(false);
-                clearTimeout(_timer);
-            } catch (error) {
-                setIsLoading(false);
-                setError(error);
-                clearTimeout(_timer);
+            const result = await restaurantRequest(latlng);
+            if (result?.results) {
+                const transformedResult = restaurantsTransform(result);
+                setRestaurants(transformedResult);
+            } else {
+                setError(result);
             }
-        }, 1000);
+
+            setIsLoading(false);
+            clearTimeout(_timer);
+        } catch (error) {
+            setIsLoading(false);
+            setRestaurants([]);
+            setError(error);
+            clearTimeout(_timer);
+        }
     };
 
     useEffect(() => {
