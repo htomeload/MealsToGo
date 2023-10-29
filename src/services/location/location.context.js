@@ -10,8 +10,6 @@ export const LocationContextProvider = ({ children }) => {
     const [location, setLocation] = useState(null);
     const [keyword, setKeyword] = useState('Antwerp');
 
-    let _timer = null;
-
     const handleSetKeyword = (value) => {
         setIsLoading(true);
         setKeyword(value);
@@ -30,19 +28,13 @@ export const LocationContextProvider = ({ children }) => {
             }
 
             setIsLoading(false);
-            clearTimeout(_timer);
         } catch (error) {
             console.log(error.stack);
             setIsLoading(false);
             setError(error?.toString());
             setLocation(null);
-            clearTimeout(_timer);
         }
     };
-
-    useEffect(() => {
-        return () => clearTimeout(_timer);
-    }, []);
 
     useEffect(() => {
         onSearch?.();

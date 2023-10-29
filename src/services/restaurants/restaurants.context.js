@@ -11,8 +11,6 @@ export const RestaurantContextProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const { location, error: locationError } = useContext(LocationContext);
 
-    let _timer = null;
-
     const fetchRestaurants = async (latlng) => {
         try {
             setIsLoading(true);
@@ -29,19 +27,13 @@ export const RestaurantContextProvider = ({ children }) => {
             }
 
             setIsLoading(false);
-            clearTimeout(_timer);
         } catch (error) {
             console.log(error.stack);
             setIsLoading(false);
             setRestaurants([]);
             setError(error?.toString());
-            clearTimeout(_timer);
         }
     };
-
-    useEffect(() => {
-        return () => clearTimeout(_timer);
-    }, []);
 
     useEffect(() => {
         if (locationError) {
