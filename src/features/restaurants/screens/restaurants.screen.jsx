@@ -4,6 +4,7 @@ import Spacer from '../../../components/spacer/Spacer.components';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { LoadingIndicator } from '../../../components/loading-indicator/LoadingIndicator.components';
 import {
+    ErrorText,
     FavoritesBarWrapper,
     RestaurantListContainer,
     RestaurantsScreenContainer,
@@ -29,8 +30,12 @@ const mockRestaurantInfo = {
 };
 
 export default function RestaurantsScreen({ navigation }) {
-    const { restaurants, isRestaurantLoading, error } = useContext(RestaurantContext);
-    const { isLocationLoading } = useContext(LocationContext);
+    const {
+        restaurants,
+        isRestaurantLoading,
+        error: restaurantError,
+    } = useContext(RestaurantContext);
+    const { isLocationLoading, error: locationError } = useContext(LocationContext);
     const { favorites } = useContext(FavoritesContext);
 
     const [isToggled, setIsToggled] = useState(false);
@@ -56,6 +61,9 @@ export default function RestaurantsScreen({ navigation }) {
                 <LoadingIndicator />
             </ViewVisibilityStyled>
             <ViewVisibilityStyled isVisible={!isLoading}>
+                {(restaurantError || locationError) && (
+                    <ErrorText variant="error">Something went wrong retriving the data</ErrorText>
+                )}
                 <RestaurantListContainer
                     data={restaurants}
                     renderItem={(flatItem) => {

@@ -23,13 +23,19 @@ export const LocationContextProvider = ({ children }) => {
             const result = await locationRequest(keyword?.toLowerCase());
             if (result) {
                 setLocation(locationTransform(result));
+                setError(null);
+            } else {
+                setError(result);
+                setLocation(null);
             }
 
             setIsLoading(false);
             clearTimeout(_timer);
         } catch (error) {
+            console.log(error.stack);
             setIsLoading(false);
-            setError(error);
+            setError(error?.toString());
+            setLocation(null);
             clearTimeout(_timer);
         }
     };

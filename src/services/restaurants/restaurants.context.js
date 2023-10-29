@@ -9,7 +9,7 @@ export const RestaurantContextProvider = ({ children }) => {
     const [restaurants, setRestaurants] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { location } = useContext(LocationContext);
+    const { location, error: locationError } = useContext(LocationContext);
 
     let _timer = null;
 
@@ -22,16 +22,19 @@ export const RestaurantContextProvider = ({ children }) => {
             if (result?.results) {
                 const transformedResult = restaurantsTransform(result);
                 setRestaurants(transformedResult);
+                setError(null);
             } else {
                 setError(result);
+                setRestaurants([]);
             }
 
             setIsLoading(false);
             clearTimeout(_timer);
         } catch (error) {
+            console.log(error.stack);
             setIsLoading(false);
             setRestaurants([]);
-            setError(error);
+            setError(error?.toString());
             clearTimeout(_timer);
         }
     };
@@ -39,6 +42,12 @@ export const RestaurantContextProvider = ({ children }) => {
     useEffect(() => {
         return () => clearTimeout(_timer);
     }, []);
+
+    useEffect(() => {
+        if (locationError) {
+            setRestaurants([]);
+        }
+    }, [locationError]);
 
     useEffect(() => {
         if (location) {
