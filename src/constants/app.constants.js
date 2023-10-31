@@ -1,5 +1,6 @@
 export const tabRouteName = {
     restaurantsTab: 'Restaurants',
+    checkOut: 'Checkout',
     mapTab: 'Map',
     settingsTab: 'Settings',
 };
@@ -30,12 +31,14 @@ export const routeKey = {
 
 export const tabActiveIcons = {
     [tabRouteName.restaurantsTab]: 'ios-restaurant',
+    [tabRouteName.checkOut]: 'cart',
     [tabRouteName.mapTab]: 'map',
     [tabRouteName.settingsTab]: 'settings',
 };
 
 export const tabInactiveIcons = {
     [tabRouteName.restaurantsTab]: 'restaurant-outline',
+    [tabRouteName.checkOut]: 'cart-outline',
     [tabRouteName.mapTab]: 'map-outline',
     [tabRouteName.settingsTab]: 'settings-outline',
 };
