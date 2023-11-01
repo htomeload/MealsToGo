@@ -10,6 +10,7 @@ import { LocationContextProvider } from '../../services/location/location.contex
 import { RestaurantContextProvider } from '../../services/restaurants/restaurants.context';
 import SettingsNavigator from './settings.navigator';
 import CheckoutScreen from '../../features/checkout/screens/checkout.screens';
+import { CartContextProvider } from '../../services/cart/cart.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +45,9 @@ export default function AppNavigator() {
         <FavoritesContextProvider>
             <LocationContextProvider>
                 <RestaurantContextProvider>
-                    <AppTabs />
+                    <CartContextProvider>
+                        <AppTabs />
+                    </CartContextProvider>
                 </RestaurantContextProvider>
             </LocationContextProvider>
         </FavoritesContextProvider>
