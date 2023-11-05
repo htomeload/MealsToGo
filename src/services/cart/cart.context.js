@@ -11,19 +11,66 @@ export const CartContextProvider = ({ children }) => {
     const [restaurant, setRestaurant] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [sum, setSum] = useState(0);
 
-    const add = (item, shop) => {
-        if (!restaurant || restaurant.placeId !== shop.placeId) {
-            setRestaurant(shop);
-            setCart([item]);
+    const add = async (item, shop) => {
+        try {
+            if (!restaurant || restaurant.placeId !== shop.placeId) {
+                setRestaurant(shop);
+                setCart([item]);
+                await AsyncStorage.setItem(`@cart-${user?.uid}`, JSON.stringify([item]));
+                await AsyncStorage.setItem(`@cart-shop-${user?.uid}`, JSON.stringify(shop));
+            } else {
+                setCart([...cart, item]);
+                await AsyncStorage.setItem(`@cart-${user?.uid}`, JSON.stringify([...cart, item]));
+            }
+        } catch (error) {
+            setError(error);
         }
-        setCart([...cart, item]);
     };
 
     const clear = () => {
         setCart([]);
         setRestaurant(null);
+        setSum(0);
     };
+
+    const _initialCart = async () => {
+        try {
+            const cartJSON = await AsyncStorage.getItem(`@cart-${user?.uid}`);
+            const restaurantJSON = await AsyncStorage.getItem(`@cart-shop-${user?.uid}`);
+
+            if (cartJSON && restaurantJSON) {
+                const _cart = JSON.parse(cartJSON);
+                const _restaurant = JSON.parse(restaurantJSON);
+
+                setCart(_cart);
+                setRestaurant(_restaurant);
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    const _calculateTotal = async () => {
+        try {
+            let _price = 0;
+            cart?.map(({ item, price }, index) => {
+                _price += price;
+            });
+            setSum(_price);
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    useEffect(() => {
+        _initialCart();
+    }, []);
+
+    useEffect(() => {
+        _calculateTotal();
+    }, [cart]);
 
     return (
         <CartContext.Provider
@@ -34,6 +81,7 @@ export const CartContextProvider = ({ children }) => {
                 error,
                 addToCart: add,
                 clearCart: clear,
+                total: sum,
             }}
         >
             {children}

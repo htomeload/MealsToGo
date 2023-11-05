@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import RestaurantMenuList from './components/restaurant-menu-list.component';
 import { mockMenus } from '../../services/restaurants/mock';
 import { ScrollView } from 'react-native';
 import RestaurantInfoCard from '../../components/restaurant-info-card/restaurant-info-card.components';
+import Spacer from '../../components/spacer/Spacer.components';
+import { OrderButton } from './components/restaurant_detail.styles';
+import { CartContext } from '../../services/cart/cart.context';
+import { tabRouteName } from '../../constants/app.constants';
 
 export default function RestaurantDetailScreen({ navigation, route }) {
     const { restaurant } = route?.params;
+
+    const { addToCart } = useContext(CartContext);
 
     const [breakfastExpanded, setBreakfastExpanded] = useState(false);
     const [lunchExpanded, setLunchExpanded] = useState(false);
     const [dinnerExpanded, setDinnerExpanded] = useState(false);
     const [drinksExpanded, setDrinksExpanded] = useState(false);
+
+    const handleOnPressOrderButton = () => {
+        addToCart?.({ item: 'special', price: 1299 }, restaurant);
+        navigation.navigate(tabRouteName.checkOut);
+    };
 
     return (
         <>
@@ -45,6 +56,11 @@ export default function RestaurantDetailScreen({ navigation, route }) {
                     onPress={setDrinksExpanded}
                 />
             </ScrollView>
+            <Spacer position={'bottom'} scale={'large'}>
+                <OrderButton onPress={handleOnPressOrderButton}>
+                    Order Special Only 12.99!
+                </OrderButton>
+            </Spacer>
         </>
     );
 }
