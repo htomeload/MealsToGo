@@ -29,10 +29,12 @@ export const CartContextProvider = ({ children }) => {
         }
     };
 
-    const clear = () => {
+    const clear = async () => {
         setCart([]);
         setRestaurant(null);
         setSum(0);
+        await AsyncStorage.removeItem(`@cart-${user?.uid}`);
+        await AsyncStorage.removeItem(`@cart-shop-${user?.uid}`);
     };
 
     const _initialCart = async () => {
