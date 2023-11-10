@@ -9,8 +9,8 @@ import { FavoritesContextProvider } from '../../services/favorites/favorites.con
 import { LocationContextProvider } from '../../services/location/location.context';
 import { RestaurantContextProvider } from '../../services/restaurants/restaurants.context';
 import SettingsNavigator from './settings.navigator';
-import CheckoutScreen from '../../features/checkout/screens/checkout.screens';
 import { CartContextProvider } from '../../services/cart/cart.context';
+import CheckOutsNavigator from './checkout.navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +33,7 @@ function AppTabs() {
     return (
         <Tab.Navigator initialRouteName="Restaurants" screenOptions={createScreenOptions}>
             <Tab.Screen name={tabRouteName.restaurantsTab} component={RestaurantsNavigator} />
-            <Tab.Screen name={tabRouteName.checkOut} component={CheckoutScreen} />
+            <Tab.Screen name={tabRouteName.checkOut} component={CheckOutsNavigator} />
             <Tab.Screen name={tabRouteName.mapTab} component={MapScreen} />
             <Tab.Screen name={tabRouteName.settingsTab} component={SettingsNavigator} />
         </Tab.Navigator>

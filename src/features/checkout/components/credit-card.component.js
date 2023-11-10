@@ -2,9 +2,13 @@ import React from 'react';
 import { LiteCreditCardInput } from 'react-native-credit-card-input';
 import { cardTokenRequest } from '../../../services/checkout/checkout.service';
 
-export default function CreditCardInput({ name, callback }) {
+export default function CreditCardInput({ name, callback, onError }) {
     const handleCallbackAfterOnChange = (card, token, isComplete) => {
         callback?.({ card, token, isComplete });
+    };
+
+    const handleOnError = (error) => {
+        onError?.(error?.toString());
     };
 
     const onChange = async (formData) => {
@@ -22,7 +26,11 @@ export default function CreditCardInput({ name, callback }) {
 
             const result = await cardTokenRequest(card);
 
-            handleCallbackAfterOnChange(card, result, true);
+            if (result?.id) {
+                handleCallbackAfterOnChange(card, result, true);
+            } else {
+                handleOnError(result);
+            }
         } else {
             handleCallbackAfterOnChange(null, null, false);
         }

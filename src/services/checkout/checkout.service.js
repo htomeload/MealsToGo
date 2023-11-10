@@ -12,7 +12,7 @@ export const cardTokenRequest = async (card) => {
         if (info) {
             return info;
         } else {
-            return null;
+            return { error: info?.toString() };
         }
         */
         const _mockStripeResponse = {
@@ -26,7 +26,7 @@ export const cardTokenRequest = async (card) => {
         return _mockStripeResponse;
     } catch (error) {
         console.log(error);
-        return null;
+        return error;
     }
 };
 
@@ -42,12 +42,12 @@ export const payRequest = async (token, amount, name) => {
         });
 
         if (result.status === 200) {
-            return result?.json();
+            return { ...result?.json(), status: result.status };
         } else {
-            return null;
+            return { error: result, status: result.status };
         }
     } catch (error) {
         console.log(error);
-        return null;
+        return { error: error?.toString(), status: 0 };
     }
 };

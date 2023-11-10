@@ -15,6 +15,9 @@ export const routeName = {
     register: 'registerScreen',
     favorites: 'Favorites',
     camera: 'Camera',
+    checkOut: 'checkOutScreen',
+    checkOutSuccess: 'checkOutSuccessScreen',
+    checkOutError: 'checkOutErrorScreen',
 };
 
 export const routeKey = {
@@ -27,6 +30,9 @@ export const routeKey = {
     register: 'register_screen',
     favorites: 'favorites_screen',
     camera: 'camera_screen',
+    checkOut: 'check_out_screen',
+    checkOutSuccess: 'check_out_success_screen',
+    checkOutError: 'check_out_error_screen',
 };
 
 export const tabActiveIcons = {

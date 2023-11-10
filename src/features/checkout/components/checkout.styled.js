@@ -17,7 +17,6 @@ export const CartIconContainer = styled(View)`
 `;
 
 export const CartIcon = styled(Avatar.Icon).attrs({
-    icon: 'cart-off',
     size: 128,
 })`
     background-color: ${(props) => props?.bg || props.theme.colors?.brand?.primary};
