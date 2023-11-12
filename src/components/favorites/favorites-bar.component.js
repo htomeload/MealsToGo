@@ -4,10 +4,19 @@ import { View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import CompactRestaurantInfo from '../restaurant/compact-restaurant-info.components';
 import Spacer from '../spacer/Spacer.components';
 import Text from '../typography/text.components';
+import { Card } from 'react-native-paper';
 
-const FavoritesWrapper = styled(View)`
+const FavoritesWrapper = styled(Card)`
     flex: 1;
-    padding: 10px;
+    z-index: 999;
+    padding-top: ${(props) => props.theme?.space?.[3]};
+    padding-left: ${(props) => props.theme?.space?.[3]};
+    padding-right: ${(props) => props.theme?.space?.[3]};
+    border-radius: 15px;
+`;
+
+const FavoritesContentWrapper = styled(View)`
+    height: 100%;
     width: 100%;
 `;
 
@@ -20,27 +29,29 @@ export default function FavoritesBar({ favorites, onPressItem }) {
 
     return (
         <FavoritesWrapper>
-            <Text variant="hint">Favorites</Text>
-            <FavoriteRestaurantsList
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                data={favorites}
-                renderItem={(flatItem) => {
-                    const { item, index } = flatItem;
+            <FavoritesContentWrapper>
+                <Text variant="hint">Favorites</Text>
+                <FavoriteRestaurantsList
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    data={favorites}
+                    renderItem={(flatItem) => {
+                        const { item, index } = flatItem;
 
-                    return (
-                        <Spacer
-                            position={'right'}
-                            scale={'large'}
-                            key={`favorite-restaurant-${item?.name}-item-${index}`}
-                        >
-                            <TouchableOpacity onPress={() => onPressItem?.(item)}>
-                                <CompactRestaurantInfo restaurant={item} />
-                            </TouchableOpacity>
-                        </Spacer>
-                    );
-                }}
-            />
+                        return (
+                            <Spacer
+                                position={'right'}
+                                scale={'large'}
+                                key={`favorite-restaurant-${item?.name}-item-${index}`}
+                            >
+                                <TouchableOpacity onPress={() => onPressItem?.(item)}>
+                                    <CompactRestaurantInfo restaurant={item} />
+                                </TouchableOpacity>
+                            </Spacer>
+                        );
+                    }}
+                />
+            </FavoritesContentWrapper>
         </FavoritesWrapper>
     );
 }

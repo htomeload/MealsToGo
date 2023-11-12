@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 import { colors } from '../../../infrastructure/theme/colors';
 
 export default function RestaurantMenuList({ isExpanded, onPress, title, leftIcon, list }) {
@@ -15,16 +15,19 @@ export default function RestaurantMenuList({ isExpanded, onPress, title, leftIco
                     <List.Icon
                         {...props}
                         icon={leftIcon}
-                        color={isExpanded ? colors.text.error : colors.text.primary}
+                        color={isExpanded ? colors.brand.secondary : colors.text.primary}
                     />
                 )}
                 expanded={isExpanded}
                 onPress={handleOnPress}
-                titleStyle={{ color: isExpanded ? colors.text.error : colors.text.primary }}
+                titleStyle={{ color: isExpanded ? colors.brand.secondary : colors.text.primary }}
                 rippleColor={'transparent'}
             >
                 {list?.map((item, index) => (
-                    <List.Item key={`menu-${item?.title}-${index}`} title={item?.title} />
+                    <>
+                        <List.Item key={`menu-${item?.title}-${index}`} title={item?.title} />
+                        <Divider />
+                    </>
                 ))}
             </List.Accordion>
         </List.Section>

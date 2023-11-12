@@ -44,3 +44,4 @@ src/utils/env.js
 .firebaserc
 firebase.json
 functions/
+app.json

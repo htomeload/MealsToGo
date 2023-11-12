@@ -4,7 +4,7 @@ import { MapViewFullScreen, MapScreenContainer } from './map.styles';
 import Search from '../components/search.component';
 import { RestaurantContext } from '../../../services/restaurants/restaurants.context';
 import { LocationContext } from '../../../services/location/location.context';
-import { Marker } from 'react-native-maps';
+import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapCallout from '../components/map-callout.component';
 import { routeName } from '../../../constants/app.constants';
 
@@ -37,6 +37,7 @@ export default function MapScreen({ navigation }) {
                     latitudeDelta: latDelta,
                     longitudeDelta: 0.02,
                 }}
+                provider={PROVIDER_GOOGLE}
             >
                 {restaurants?.map((restaurant) => (
                     <Marker

@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import {
+    SettingBackground,
     SettingMenuItem,
     SettingScreenContainer,
     UserEmailText,
@@ -13,6 +14,7 @@ import Spacer from '../../../components/spacer/Spacer.components';
 import { routeName } from '../../../constants/app.constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { colors } from '../../../infrastructure/theme/colors';
 
 export default function SettingsScreen({ navigation }) {
     const { onLogout, user } = useContext(AuthenticationContext);
@@ -46,28 +48,53 @@ export default function SettingsScreen({ navigation }) {
     );
 
     return (
-        <SettingScreenContainer>
-            <UserIconWrapper onPress={handleOnPressProfile}>
-                {photo ? <UserImage source={{ uri: photo }} /> : <UserIcon />}
-                <Spacer position={'top'} scale={'large'}>
-                    <UserEmailText>{user?.email}</UserEmailText>
-                </Spacer>
-            </UserIconWrapper>
-            <List.Section>
-                <SettingMenuItem
-                    title={'Favorites'}
-                    description="View your favorites"
-                    left={(props) => <List.Icon {...props} color="black" icon="heart" />}
-                    onPress={handleOnPressViewFavorites}
-                />
-                <SettingMenuItem
-                    title={'Logout'}
-                    left={(props) => (
-                        <List.Icon {...props} color="black" icon="lock-open-outline" />
-                    )}
-                    onPress={handleOnPressLogout}
-                />
-            </List.Section>
-        </SettingScreenContainer>
+        <SettingBackground>
+            <SettingScreenContainer>
+                <UserIconWrapper onPress={handleOnPressProfile}>
+                    {photo ? <UserImage source={{ uri: photo }} /> : <UserIcon />}
+                    <Spacer position={'top'} scale={'large'}>
+                        <UserEmailText>{user?.email}</UserEmailText>
+                    </Spacer>
+                </UserIconWrapper>
+                <List.Section>
+                    <SettingMenuItem
+                        title={'Favorites'}
+                        description="View your favorites"
+                        left={(props) => (
+                            <List.Icon {...props} color={colors.ui.error} icon="heart" />
+                        )}
+                        onPress={handleOnPressViewFavorites}
+                    />
+                    <Spacer position={'top'} scale={'small'} />
+                    <SettingMenuItem
+                        title={'Payment'}
+                        left={(props) => (
+                            <List.Icon {...props} color={colors.ui.secondary} icon="cart" />
+                        )}
+                        onPress={() => null}
+                    />
+                    <Spacer position={'top'} scale={'small'} />
+                    <SettingMenuItem
+                        title={'Past Orders'}
+                        left={(props) => (
+                            <List.Icon {...props} color={colors.ui.secondary} icon="history" />
+                        )}
+                        onPress={() => null}
+                    />
+                    <Spacer position={'top'} scale={'small'} />
+                    <SettingMenuItem
+                        title={'Logout'}
+                        left={(props) => (
+                            <List.Icon
+                                {...props}
+                                color={colors.ui.secondary}
+                                icon="lock-open-outline"
+                            />
+                        )}
+                        onPress={handleOnPressLogout}
+                    />
+                </List.Section>
+            </SettingScreenContainer>
+        </SettingBackground>
     );
 }

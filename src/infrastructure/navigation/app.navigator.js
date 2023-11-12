@@ -18,14 +18,14 @@ const tabBarIcon = ({ focused, color, size, route }) => (
     <Ionicons
         name={focused ? tabActiveIcons?.[route?.name] : tabInactiveIcons?.[route?.name]}
         size={24}
-        color={focused ? colors.text.error : colors.text.secondary}
+        color={focused ? colors.brand.primary : colors.brand.muted}
     />
 );
 
 const createScreenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => tabBarIcon({ focused, color, size, route }),
-    tabBarActiveTintColor: colors.text.error,
-    tabBarInactiveTintColor: colors.text.secondary,
+    tabBarActiveTintColor: colors.brand.primary,
+    tabBarInactiveTintColor: colors.brand.muted,
     headerShown: false,
 });
 

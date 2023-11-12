@@ -27,7 +27,7 @@ export const ViewVisibilityStyled = styled(ViewVisibility)`
 `;
 
 export const FavoritesBarWrapper = styled(ViewVisibility)`
-    ${({ isVisible }) => (isVisible ? `flex: 0.6;` : `flex: 0;`)}
+    ${({ isVisible }) => (isVisible ? `flex: 0.5;` : `flex: 0;`)}
 `;
 
 export const ErrorText = styled(Text)`

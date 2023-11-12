@@ -30,7 +30,7 @@ export default function RestaurantInfoCard({ restaurant }) {
             .map((x, i) => Math.abs(i) ?? 0) ?? [];
 
     return (
-        <RestaurantCard elevation={5}>
+        <RestaurantCard elevation={2}>
             <Favorite restaurant={restaurant} />
             <RestaurantCardCover
                 resizeMethod="scale"

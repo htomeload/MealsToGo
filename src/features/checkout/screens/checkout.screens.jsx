@@ -13,7 +13,7 @@ import Text from '../../../components/typography/text.components';
 import CreditCardInput from '../components/credit-card.component';
 import { CartContext } from '../../../services/cart/cart.context';
 import RestaurantInfoCard from '../../../components/restaurant-info-card/restaurant-info-card.components';
-import { List } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 import Spacer from '../../../components/spacer/Spacer.components';
 import { payRequest } from '../../../services/checkout/checkout.service';
 import { routeName } from '../../../constants/app.constants';
@@ -97,6 +97,9 @@ export default function CheckoutScreen({ navigation }) {
                     ))}
                 </List.Section>
                 <Text>Total: {total / 100}</Text>
+                <Spacer position={'top'} scale={'medium'}>
+                    <Divider />
+                </Spacer>
                 <NameInput label={'Name'} value={name} onChangeText={(text) => setName(text)} />
                 <Spacer position={'top'} scale={'medium'}>
                     {name?.length > 0 && (
