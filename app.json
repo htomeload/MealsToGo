@@ -13,13 +13,22 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.chabakeawcoding.MealsToGo"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "permissions": ["android.permission.CAMERA", "android.permission.RECORD_AUDIO"],
+            "package": "com.chabakeawcoding.MealsToGo",
+            "config": {
+                "googleMaps": {
+                    "apiKey": ""
+                }
+            },
+            "versionCode": 1
         },
         "plugins": [
             [
@@ -28,6 +37,11 @@
                     "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
                 }
             ]
-        ]
+        ],
+        "extra": {
+            "eas": {
+                "projectId": "b56bd53c-a43c-474f-8665-4c05bd5cad02"
+            }
+        }
     }
 }
